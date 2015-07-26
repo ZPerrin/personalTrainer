@@ -1,4 +1,4 @@
-# personalTrainer
+# Personal Trainer
 
 intended to be a simple excersice tracking app to track w/e (workouts, cardio, etc), analytics piece (graphs are fun),
 maybe integrate it with pebble or something similar using google maps api? Basically all the regualr full stack stuff, hopefully 
