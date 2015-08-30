@@ -2,8 +2,8 @@ package com.pt.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.stereotype.Controller;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Spring base configuration class, injected into the rootContext in {@link AppInitializer}.
@@ -11,6 +11,10 @@ import org.springframework.stereotype.Controller;
  * note - we're excluding @Controllers here - those will be managed by the WebContext - see: {@link com.pt.config.WebRootConfig}
  */
 @Configuration
-@ComponentScan(basePackages = {"com.pt"}, excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Controller.class)})
+@EnableTransactionManagement
+@ComponentScan(basePackages = {"com.pt"})
+@EnableJpaRepositories("com.pt.persistence.repository")
 public class SpringRootConfig {
+
+
 }
