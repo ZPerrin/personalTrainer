@@ -1,5 +1,6 @@
 package com.pt.config.db;
 
+import org.h2.tools.Server;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 
 /**
  * Database configuration(s).
@@ -24,7 +26,7 @@ public class DataSourceConfig {
     /**
      * H2 in-memory development database.  Plan is to develop against this,
      * and use another platform in production (MySQL?). DDL & DML scripts
-     * should be bootstrapped here
+     * should be bootstrapped here.
      *
      * @return
      */
@@ -37,6 +39,12 @@ public class DataSourceConfig {
                 .addScript("db/scripts/h2/test_DML.sql")
                 .build();
         return h2db;
+    }
+
+    @Profile("dev")
+    @Bean(initMethod = "start", destroyMethod = "stop")
+    public Server startDBManager() throws SQLException {
+        return Server.createWebServer();
     }
 
     @Bean

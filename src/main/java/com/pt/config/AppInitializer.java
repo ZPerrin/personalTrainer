@@ -34,7 +34,7 @@ public class AppInitializer implements WebApplicationInitializer {
         // register and map the dispatcher servlet
         ServletRegistration.Dynamic dispatcherServlet = servletContext.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
         dispatcherServlet.setLoadOnStartup(1);
-        dispatcherServlet.addMapping("/*");
+        dispatcherServlet.addMapping("/");
     }
 
     /**
