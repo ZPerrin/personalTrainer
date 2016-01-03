@@ -4,13 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
- *  User Entity
+ *  User Entity - the Principal of this application
  */
 @Entity
 @Table(name = "User")
-public class User {
+public class User implements Serializable {
 
     @Id
     private Integer id;
@@ -102,5 +103,32 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (!id.equals(user.id)) return false;
+        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
+        if (!displayName.equals(user.displayName)) return false;
+        if (!email.equals(user.email)) return false;
+        return password != null ? password.equals(user.password) : user.password == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + displayName.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        return result;
     }
 }
