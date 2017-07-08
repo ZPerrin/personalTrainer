@@ -21,10 +21,10 @@ import java.util.List;
 public class IndexController {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    UserServiceImpl userService;
+    private UserServiceImpl userService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showIndex(Model model) {
@@ -32,7 +32,7 @@ public class IndexController {
         User user = userRepository.findOne(1);
         model.addAttribute("user", user);
 
-        List<Set> setList = userService.retrieveSetsForUser(user);
+        List<Set> setList = userService.fetchSetsForUser(user);
 
         return "index";
     }
@@ -48,7 +48,7 @@ public class IndexController {
     @RequestMapping(path="/user/emailOrName/{emailOrName}", method = RequestMethod.GET)
     @ResponseBody
     public User getByEmailOrName(@PathVariable String emailOrName) {
-        User user = userRepository.findByUserName(emailOrName);
+        User user = userRepository.findByUserNameOrEmail(emailOrName);
         return user;
     }
 }
