@@ -3,7 +3,6 @@ package com.pt.config.security;
 import com.pt.persistence.entity.User;
 import com.pt.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +25,7 @@ public class UserRepositoryUserDetailsService implements UserDetailsService {
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUserName(username);
+        User user = userRepository.findByUserNameOrEmail(username);
         if (user == null) {
             throw new UsernameNotFoundException(String.format("Could not find user: %s", username));
         }

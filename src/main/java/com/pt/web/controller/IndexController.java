@@ -3,7 +3,7 @@ package com.pt.web.controller;
 import com.pt.persistence.entity.Set;
 import com.pt.persistence.entity.User;
 import com.pt.persistence.repository.UserRepository;
-import com.pt.service.impl.UserServiceImpl;
+import com.pt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +24,7 @@ public class IndexController {
     private UserRepository userRepository;
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showIndex(Model model) {

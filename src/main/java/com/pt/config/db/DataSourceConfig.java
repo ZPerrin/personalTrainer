@@ -4,7 +4,6 @@ import org.h2.tools.Server;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -24,13 +23,12 @@ import java.sql.SQLException;
 public class DataSourceConfig {
 
     /**
-     * H2 in-memory development database.  Plan is to develop against this,
-     * and use another platform in production (MySQL?). DDL & DML scripts
-     * should be bootstrapped here.
+     * H2 in-memory development database for development.
+     * DDL & DML scripts should be bootstrapped here.
      *
-     * @return
+     * @return H2 implementation of a {@link DataSource}
      */
-    @Profile("dev")
+    //@Profile("dev")
     @Bean
     DataSource dataSource() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
@@ -41,7 +39,7 @@ public class DataSourceConfig {
         return h2db;
     }
 
-    @Profile("dev")
+    //@Profile("dev")
     @Bean(initMethod = "start", destroyMethod = "stop")
     public Server startDBManager() throws SQLException {
         return Server.createWebServer();
