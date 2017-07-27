@@ -4,6 +4,7 @@ import org.h2.tools.Server;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -16,7 +17,7 @@ import java.sql.SQLException;
 /**
  * Database configuration(s).
  * <p/>
- * dev: h2 -> localhost:8082 -> jdbc:h2:mem:testdb;MVCC=TRUE
+ * dev: h2 in memory -> localhost:8082 -> jdbc:h2:mem:testdb;MVCC=TRUE
  * // todo: prod setup
  */
 @Configuration
@@ -28,7 +29,7 @@ public class DataSourceConfig {
      *
      * @return H2 implementation of a {@link DataSource}
      */
-    //@Profile("dev")
+    @Profile("dev")
     @Bean
     DataSource dataSource() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
@@ -39,7 +40,12 @@ public class DataSourceConfig {
         return h2db;
     }
 
-    //@Profile("dev")
+    /**
+     * Starts web GUI on localhost:80880 and loads the in-memory h2 db
+     * See class javadoc for more info
+     * @throws SQLException
+     */
+    @Profile("dev")
     @Bean(initMethod = "start", destroyMethod = "stop")
     public Server startDBManager() throws SQLException {
         return Server.createWebServer();

@@ -6,13 +6,15 @@
  * user guide available at https://docs.gradle.org/3.5/userguide/tutorial_java_projects.html
  */
 
-// plugins
 plugins {
+    // backend & frontend dependency management
     id "io.spring.dependency-management" version "1.0.3.RELEASE"
+    id 'com.craigburke.client-dependencies' version '1.4.0'
 }
 
 apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.craigburke.client-dependencies'
 
 repositories {
     jcenter()
@@ -50,4 +52,13 @@ dependencies {
     // jpa provider & orm
     compile 'org.hibernate:hibernate-core:4.3.11.Final'
     compile 'org.hibernate:hibernate-entitymanager:4.3.11.Final'
+}
+
+clientDependencies {
+    installDir = 'src/main/webapp/resources/vendor'
+    bower {
+        'jquery'('3.2.1')
+        'bootstrap'('3.3.6', exclude: 'jquery')
+        'd3'('latest')
+    }
 }

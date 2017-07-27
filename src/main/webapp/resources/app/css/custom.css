@@ -1,0 +1,12 @@
+/* todo: make this dynamic */
+.login-graphic {
+    width: 600px;
+    height: 600px;
+}
+
+.absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
