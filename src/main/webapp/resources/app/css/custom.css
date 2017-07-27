@@ -4,6 +4,11 @@
     height: 600px;
 }
 
+.login-poly {
+    fill: #0ca8a0;
+    stroke-width:2;
+}
+
 .absolute-center {
     position: absolute;
     top: 50%;
