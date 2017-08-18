@@ -1,4 +1,4 @@
-/* todo: make this dynamic */
+/* TODO: make height/width dynamic based on viewport */
 .login-graphic {
     width: 600px;
     height: 600px;
@@ -6,6 +6,13 @@
 
 .login-poly {
     fill: #0ca8a0;
+    fill-opacity: .8;
+    stroke:black;
+    stroke-width:2;
+}
+
+.login-line {
+    stroke:black;
     stroke-width:2;
 }
 
